@@ -72,9 +72,7 @@ const Login = () => {
           </Button>
           </Box>
           <Box>
-         </Box><Box ms={10}><Button colorScheme="blue" as={Link} to="/register">
-            SingUp
-          </Button>
+        
           </Box>
         </Flex>
 
