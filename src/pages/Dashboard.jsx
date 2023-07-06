@@ -15,7 +15,8 @@ import {
   // Avatar,
   Image,
   Stack,
-  ButtonGroup
+  ButtonGroup,
+  Box
 } from "@chakra-ui/react"
 import axios from "axios";
 import { useState, useEffect } from "react";
@@ -69,8 +70,9 @@ export default function Dashboard() {
       }
     }
   };
-  const handleView = (_id) => {
-      navigate(`/viewblog/${_id}`);
+  const handleView = (id) => {
+    console.log(id)
+      navigate(`/Viewblog/${id}`);
       // window.location.reload();
   };
   
@@ -92,24 +94,27 @@ export default function Dashboard() {
   return (
     <SimpleGrid spacing={10} minChildWidth={300}>
       {tasks.map(results => (
-        <Card key={results._id} borderTop="8px" borderLef borderColor="#eddea4" bg="#e0e1dd">
+        <Card key={results._id} borderTop="8px"  borderLef borderColor="#eddea4" bg="#e0e1dd">
           {/* <NavLink to={`/viewblog/${results._id}`} onClick={window.location.reload()} > */}
-          <CardBody onClick={() => handleView(results._id)} >
+          <Box as="button" onClick={() => handleView(results._id)}>
+          <CardBody >
             <Image
               src={results.image}
               alt='Green double couch with wooden legs'
-              borderRadius='lg'
+              borderRadius='lg' 
             />
             <Stack mt='6' spacing='3'>
               <Heading size='md'>{results.title}</Heading>
-              <Text>
-                {results.description.slice(0, 130)} ...
+              <Text dangerouslySetInnerHTML={{ __html: results.description.slice(0, 130) }}> 
+                {/* {results.description.slice(0, 130)} */}
+                 
               </Text>
               <Text color='blue.600' fontSize='2xl'>
                 Created  {results.createdAt.slice(0, 10)}
               </Text>
             </Stack>
           </CardBody>
+          </Box>
           {/* </NavLink> */}
           <Divider />
           <CardFooter>
