@@ -8,9 +8,7 @@ export default function ViewBlog() {
   const { id } = useParams();
   const [blog, setBlog] = useState(null);
 
-  useEffect(() => {
-    fetchBlogData();
-  }, []);
+  
 
   const fetchBlogData = async () => {
     try {
@@ -21,7 +19,12 @@ export default function ViewBlog() {
       console.error("Error fetching blog data:", error);
     }
   };
-
+  
+  useEffect(() => {
+    fetchBlogData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  
   if (!blog) {
     return <div>Loading...</div>;
   }

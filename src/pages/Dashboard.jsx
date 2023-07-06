@@ -27,6 +27,7 @@ export default function Dashboard() {
   const token = localStorage.getItem('token');
   useEffect(() => {
     fetchQuizData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   
   

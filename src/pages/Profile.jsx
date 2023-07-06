@@ -2,7 +2,7 @@ import {
   ChatIcon,
   CheckCircleIcon,
   EmailIcon,
-  StarIcon,
+  // StarIcon,
   WarningIcon
 } from '@chakra-ui/icons';
 import {
