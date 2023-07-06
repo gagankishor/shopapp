@@ -72,7 +72,6 @@ const Login = () => {
           </Button>
           </Box>
           <Box>
-        
           </Box>
         </Flex>
 

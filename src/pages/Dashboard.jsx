@@ -19,7 +19,7 @@ import {
 } from "@chakra-ui/react"
 import axios from "axios";
 import { useState, useEffect } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
 
 export default function Dashboard() {
   const [tasks, setTasks] = useState([]);
@@ -69,6 +69,11 @@ export default function Dashboard() {
       }
     }
   };
+  const handleView = (_id) => {
+      navigate(`/Viewblog/${_id}`);
+      window.location.reload();
+  };
+  
   
   const fetchQuizData = async () => {
     try {
@@ -88,8 +93,8 @@ export default function Dashboard() {
     <SimpleGrid spacing={10} minChildWidth={300}>
       {tasks.map(results => (
         <Card key={results._id} borderTop="8px" borderLef borderColor="#eddea4" bg="#e0e1dd">
-          <NavLink to={`/viewblog/${results._id}`}>
-          <CardBody>
+          {/* <NavLink to={`/viewblog/${results._id}`} onClick={window.location.reload()} > */}
+          <CardBody onClick={() => handleView(results._id)} >
             <Image
               src={results.image}
               alt='Green double couch with wooden legs'
@@ -104,7 +109,8 @@ export default function Dashboard() {
                 Created  {results.createdAt.slice(0, 10)}
               </Text>
             </Stack>
-          </CardBody></NavLink>
+          </CardBody>
+          {/* </NavLink> */}
           <Divider />
           <CardFooter>
           
