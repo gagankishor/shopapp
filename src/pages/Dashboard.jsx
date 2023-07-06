@@ -70,8 +70,8 @@ export default function Dashboard() {
     }
   };
   const handleView = (_id) => {
-      navigate(`/Viewblog/${_id}`);
-      window.location.reload();
+      navigate(`/viewblog/${_id}`);
+      // window.location.reload();
   };
   
   
