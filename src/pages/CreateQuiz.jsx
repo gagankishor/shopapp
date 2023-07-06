@@ -1,25 +1,14 @@
-// import { 
-//   Box, 
-//   FormControl, 
-//   FormLabel, 
-//   FormHelperText, 
-//   Input, 
-//   Textarea, 
-//   Button, 
-//   Heading
-// } from '@chakra-ui/react'
-// import { useState } from 'react';
-// import { Form, useNavigate } from 'react-router-dom'
-
-import { useState } from 'react';
-import { Box, Heading, FormControl, FormLabel, Input, FormHelperText, Textarea, Button } from '@chakra-ui/react';
+import { useRef, useState } from 'react';
+import { Box, Heading, FormControl, FormLabel, Input, FormHelperText,  Button } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
+import JoditEditor from 'jodit-react';
 
 export default function Create() {
   const [title, setTitle] = useState('');
   const [image, setImage] = useState('');
   const [description, setDescription] = useState('');
   const navigate = useNavigate();
+  const editor = useRef(null);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -73,14 +62,12 @@ export default function Create() {
 
         <FormControl mb="40px">
           <FormLabel>Blog description:</FormLabel>
-          <Textarea
-            placeholder="Enter a detailed description for your Blog..."
-            name="description"
+          <JoditEditor
+            ref={editor}
             value={description}
-            onChange={(e) => setDescription(e.target.value)}
+            onChange={(e) => setDescription(e)}
           />
         </FormControl>
-
         <Button type="submit">Submit</Button>
       </form>
     </Box>

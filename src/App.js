@@ -1,9 +1,9 @@
 import React from 'react';
-import { 
-  createBrowserRouter, 
-  createRoutesFromElements, 
-  Route, 
-  RouterProvider 
+import {
+  createBrowserRouter,
+  createRoutesFromElements,
+  Route,
+  RouterProvider
 } from 'react-router-dom'
 
 
@@ -13,7 +13,7 @@ import Dashboard from './pages/Dashboard';
 import Profile from './pages/Profile';
 // import { createAction } from './pages/CreateQuiz';
 // import Question from './pages/Question';
-import CreateQuestion from './pages/CreateQuestion';
+// import CreateQuestion from './pages/CreateQuestion';
 import Create from './pages/CreateQuiz';
 import Login from './pages/login';
 import Register from './pages/Register';
@@ -28,9 +28,8 @@ const router = createBrowserRouter(
     <Route path="/" element={<RootLayout />}>
       <Route exact index element={<Dashboard />} />
       {/* <Route exact path="questioncreate" element={<CreateQuestion />} action={createQuestionAction} /> */}
-      <Route exact path="questioncreate" element={token?<CreateQuestion/>: <Login />} />
-      <Route exact path="/editblog/:id" element={token?<Edit/>: <Login />}/>
-      <Route exact path="/viewblog/:id" element={<ViewBlog/>}/>
+      <Route exact path="/editblog/:id" element={token ? <Edit /> : <Login />} />
+      <Route exact path="/viewblog/:id" element={<ViewBlog />} />
       {/* <Route exact path="/editblog/:id" element={<CreateQuestion/>}/> */}
       <Route exact path="profile" element={<Profile />} />
       <Route exact path="create" element={<Create />} />
@@ -42,7 +41,7 @@ const router = createBrowserRouter(
 
 function App() {
   return (<>
-      <RouterProvider router={router} /></>
+    <RouterProvider router={router} /></>
   );
 }
 
