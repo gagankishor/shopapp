@@ -1,47 +1,61 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { Box, Heading, Image, Text } from "@chakra-ui/react";
+import { Box, Flex, Heading, Image, Spinner, Text } from "@chakra-ui/react";
 import axios from "axios";
 import Dashboard from "./Dashboard";
 
 export default function ViewBlog() {
   const { id } = useParams();
   const [blog, setBlog] = useState(null);
-
-
+  const [isLoading, setLoading] = useState(true); // Add isLoading state
 
   const fetchBlogData = async () => {
     try {
       const response = await axios.get(`https://blog1-br26.onrender.com/api/users/items/${id}`);
       const data = response.data.results;
       setBlog(data);
+      setLoading(false); // Set loading to false after data is fetched
     } catch (error) {
       console.error("Error fetching blog data:", error);
+      setLoading(false); // Set loading to false in case of error
     }
   };
 
   useEffect(() => {
     fetchBlogData();
+
+    const documentHeight = Math.floor((document.documentElement.scrollHeight - window.innerHeight) * 0);
+    window.scrollTo(0, documentHeight / 4);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [id]);
+  }, [id ,isLoading]);
+
+  if (isLoading) {
+    return (
+      <Flex align="center" justify="center" height="100vh">
+        <Spinner size="xl" />
+      </Flex>
+    );  }
 
   if (!blog) {
-    return <div>Loading...</div>;
+    return <div>Error loading blog data.</div>; // Render an error message if data is not available
   }
 
   return (
     <Box margin={"50px"} alignItems={"center"}>
-      <Box mb={"50px"} >
-        <Image src={blog.image} alt="Green double couch with wooden legs" borderRadius="lg" />
-        <Heading as="h1" color="#f8f9fa" fontSize="2xl" mt={10} mb={10}>
+      <Box mb={"50px"}>
+        <Image src={blog.image} width={1300} mb={5} height={600} alt="Green double couch with wooden legs" borderRadius="lg" />
+        <hr/>
+        <Heading as="h1" textAlign={"center"} color="#1b263b" fontSize="2xl" mt={5} mb={5}>
           {blog.title}
         </Heading>
-        <Text fontSize="md" color="#ced4da" mb={4} dangerouslySetInnerHTML={{ __html: blog.description }}>
+        <hr/>
+        <Text fontSize="md" textAlign={"justify"} color="#415a77" mt={5} mb={4} dangerouslySetInnerHTML={{ __html: blog.description }}>
           {/* {blog.description} */}
-        </Text>
+        </Text> <hr/>
         {/* Additional blog content */}
       </Box>
-      <Dashboard/>
+     
+      <Dashboard />
     </Box>
   );
 }

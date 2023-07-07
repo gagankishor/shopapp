@@ -16,16 +16,22 @@ import {
   Image,
   Stack,
   ButtonGroup,
-  Box
+  Box,
+  Spinner,
+  Flex
+  
 } from "@chakra-ui/react"
 import axios from "axios";
 import { useState, useEffect } from "react";
 import {  useNavigate } from "react-router-dom";
 
+
 export default function Dashboard() {
   const [tasks, setTasks] = useState([]);
   const navigate = useNavigate();
   const token = localStorage.getItem('token');
+  const [isLoading, setLoading] = useState(true); // Add isLoading state
+
   useEffect(() => {
     fetchQuizData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -79,37 +85,48 @@ export default function Dashboard() {
   
   const fetchQuizData = async () => {
     try {
-      const response = await axios.get('https://blog1-br26.onrender.com/api/users/items', {
+      const response = await axios.get("https://blog1-br26.onrender.com/api/users/items", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
       const data = response.data.results;
       setTasks(data);
+      setLoading(false); // Set loading to false after data is fetched
     } catch (error) {
-      console.error('Error fetching quiz data:', error);
+      console.error("Error fetching quiz data:", error);
+      setLoading(false); // Set loading to false in case of error
     }
   };
+  if (isLoading) {
+    return (
+      <Flex align="center" justify="center" height="100vh">
+        <Spinner size="xl" />
+      </Flex>
+    );
+  }
   
   return (
-    <SimpleGrid spacing={10} minChildWidth={300}>
+    <SimpleGrid spacing={10} minChildWidth={250}>
       {tasks.map(results => (
-        <Card key={results._id} borderTop="8px"  borderLef borderColor="#eddea4" bg="#e0e1dd">
+        <Card key={results._id} borderTop="8px" height={450} borderLef borderColor="#eddea4" bg="#ffffff">
           {/* <NavLink to={`/viewblog/${results._id}`} onClick={window.location.reload()} > */}
           <Box as="button" onClick={() => handleView(results._id)}>
-          <CardBody >
+          <CardBody height={360} >
             <Image
+              height={150}
+              width={300}
               src={results.image}
               alt='Green double couch with wooden legs'
               borderRadius='lg' 
             />
-            <Stack mt='6' spacing='3'>
-              <Heading size='md'>{results.title}</Heading>
-              <Text dangerouslySetInnerHTML={{ __html: results.description.slice(0, 130) }}> 
+            <Stack mt='4' spacing='3'>
+              <Heading textAlign={"center"}  size='sm'>{results.title.slice(0, 50)}</Heading>
+              <Text size='sm'  textAlign={"justify"} dangerouslySetInnerHTML={{ __html: results.description.slice(0, 100) }}> 
                 {/* {results.description.slice(0, 130)} */}
                  
               </Text>
-              <Text color='blue.600' fontSize='2xl'>
+              <Text mt={25}  color='blue.600' fontSize='sm'>
                 Created  {results.createdAt.slice(0, 10)}
               </Text>
             </Stack>
