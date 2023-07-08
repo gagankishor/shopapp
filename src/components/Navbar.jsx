@@ -29,8 +29,8 @@ export default function Navbar() {
   };
 
   return (
-    <Flex as="nav" p="5px" mb="60px" alignItems="center" position="sticky" top="0" zIndex="10" backgroundColor="">
-      <Heading as="h1" fontSize="1.5em">GAGAN'S BLOGS</Heading>
+    <Flex as="nav" p="5px"  alignItems="center" position="sticky" top="0" zIndex="10" backgroundColor="">
+      <Heading  as={Link} to="/" exact fontSize="1.5em">GAGAN'S BLOGS</Heading>
       <Spacer />
 
       <HStack textColor={"001219"} spacing="20px"> 
@@ -39,11 +39,6 @@ export default function Navbar() {
             <Text fontSize="xs" color="white">3</Text>
           </AvatarBadge>
         </Avatar>
-
-        {/* Add Dashboard Button */}
-        <Button textColor={"001219"} colorScheme="transparent" as={Link} to="/" exact>
-          Dashboard
-        </Button>
 
         {/* Add New Blog Button */}
         <Button textColor={"001219"} colorScheme="transparent" as={Link} to="/create">

@@ -43,44 +43,52 @@ export default function Create() {
       </Flex>
     );  }
 
-  return (
-    <Box maxW="480px">
-      <Heading>Create Blog</Heading>
-      <form onSubmit={handleSubmit}>
-        <FormControl isRequired mb="40px">
-          <FormLabel>Blog Name:</FormLabel>
-          <Input
-            type="text"
-            value={title}
-            name="title"
-            onChange={(e) => setTitle(e.target.value)}
-          />
-          <FormHelperText>Enter a descriptive Blog name.</FormHelperText>
-        </FormControl>
-
-        <FormControl mb="40px">
-          <FormLabel>Blog Image URL</FormLabel>
-          <Input
-            type="text"
-            placeholder="Enter Blog Image URL..."
-            name="Image"
-            value={image}
-            onChange={(e) => setImage(e.target.value)}
-          />
-        </FormControl>
-
-        <FormControl mb="40px">
-          <FormLabel>Blog description:</FormLabel>
-          <JoditEditor
-            ref={editor}
-            value={description}
-            onChange={(e) => setDescription(e)}
-          />
-        </FormControl>
-        <Button type="submit">Submit</Button>
-      </form>
-    </Box>
-  );
+    return (
+      <Flex mt={-100} align="center" justify="center" height="100vh">
+        <Box maxW="480px" p={4}>
+          <Heading textAlign="center" mb={4}>
+            Create Blog
+          </Heading>
+          <form onSubmit={handleSubmit}>
+            <FormControl isRequired mb={4}>
+              <FormLabel>Blog Name:</FormLabel>
+              <Input
+                type="text"
+                value={title}
+                name="title"
+                onChange={(e) => setTitle(e.target.value)}
+              />
+              <FormHelperText>Enter a descriptive Blog name.</FormHelperText>
+            </FormControl>
+    
+            <FormControl mb={4}>
+              <FormLabel>Blog Image URL</FormLabel>
+              <Input
+                type="text"
+                placeholder="Enter Blog Image URL..."
+                name="Image"
+                value={image}
+                onChange={(e) => setImage(e.target.value)}
+              />
+            </FormControl>
+    
+            <FormControl mb={4}>
+              <FormLabel>Blog Description:</FormLabel>
+              <JoditEditor
+                ref={editor}
+                value={description}
+                onChange={(e) => setDescription(e)}
+              />
+            </FormControl>
+    
+            <Button type="submit" colorScheme="blackAlpha" isFullWidth>
+              Submit
+            </Button>
+          </form>
+        </Box>
+      </Flex>
+    );
+    
 }
 
 

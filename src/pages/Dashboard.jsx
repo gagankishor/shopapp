@@ -10,7 +10,7 @@ import {
   CardBody,
   CardFooter,
   // HStack,
-  Divider,
+  
   Button,
   // Avatar,
   Image,
@@ -18,12 +18,13 @@ import {
   ButtonGroup,
   Box,
   Spinner,
-  Flex
-  
+  Flex,
+  Badge
+
 } from "@chakra-ui/react"
 import axios from "axios";
 import { useState, useEffect } from "react";
-import {  useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 
 export default function Dashboard() {
@@ -36,8 +37,8 @@ export default function Dashboard() {
     fetchQuizData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  
-  
+
+
   const handleClick = async (_id) => {
     if (token) {
       try {
@@ -63,7 +64,7 @@ export default function Dashboard() {
       }
     }
   };
-  
+
   const handleEdit = (_id) => {
     if (token) {
       console.log("token found");
@@ -78,11 +79,11 @@ export default function Dashboard() {
   };
   const handleView = (id) => {
     console.log(id)
-      navigate(`/Viewblog/${id}`);
-      // window.location.reload();
+    navigate(`/Viewblog/${id}`);
+    // window.location.reload();
   };
-  
-  
+
+
   const fetchQuizData = async () => {
     try {
       const response = await axios.get("https://blog1-br26.onrender.com/api/users/items", {
@@ -105,51 +106,55 @@ export default function Dashboard() {
       </Flex>
     );
   }
-  
+
   return (
-    <SimpleGrid spacing={10} minChildWidth={250}>
-      {tasks.map(results => (
-        <Card key={results._id} borderTop="8px" height={450} borderLef borderColor="#eddea4" bg="#ffffff">
-          {/* <NavLink to={`/viewblog/${results._id}`} onClick={window.location.reload()} > */}
-          <Box as="button" onClick={() => handleView(results._id)}>
-          <CardBody height={360} >
+    <SimpleGrid padding={50} spacing={10} minChildWidth={250}>
+    {tasks.map(results => (
+      <Card key={results._id}  boxShadow={"dark-lg"} height={"auto"} borderLef="8px" borderColor="#c5c5c5" bg="#ffffff">
+        <Box as="button" onClick={() => handleView(results._id)}>
+          <CardBody height={360}>
             <Image
               height={150}
               width={300}
               src={results.image}
-              alt='Green double couch with wooden legs'
-              borderRadius='lg' 
+              alt="Green double couch with wooden legs"
+              borderRadius="lg"
             />
-            <Stack mt='4' spacing='3'>
-              <Heading textAlign={"center"}  size='sm'>{results.title.slice(0, 50)}</Heading>
-              <Text size='sm'  textAlign={"justify"} dangerouslySetInnerHTML={{ __html: results.description.slice(0, 100) }}> 
+            <Stack mt="4" spacing="3">
+              <Heading textAlign="center" size="sm">
+                {results.title.slice(0, 50)}
+              </Heading>
+              <Text size="sm" textAlign="justify" dangerouslySetInnerHTML={{ __html: results.description.slice(0, 100) }}>
                 {/* {results.description.slice(0, 130)} */}
-                 
-              </Text>
-              <Text mt={25}  color='blue.600' fontSize='sm'>
-                Created  {results.createdAt.slice(0, 10)}
               </Text>
             </Stack>
           </CardBody>
-          </Box>
-          {/* </NavLink> */}
-          <Divider />
+        </Box>
+        
+        {token && (
           <CardFooter>
-          
-            <ButtonGroup >
-
-              <Button variant='ghost' colorScheme='red' onClick={() => handleClick(results._id)} >
+            <ButtonGroup>
+              <Button variant="ghost" colorScheme="red" onClick={() => handleClick(results._id)}>
                 DELETE
               </Button>
-              
-              <Button variant='ghost' colorScheme='blue' onClick={() => handleEdit(results._id)}>
+              <Button variant="ghost" colorScheme="blue" onClick={() => handleEdit(results._id)}>
                 Edit
               </Button>
             </ButtonGroup>
           </CardFooter>
-          
-        </Card>
-      ))}
-    </SimpleGrid>
+        )}
+        <Box position="absolute" top="-5" right="-3">
+          <Badge colorScheme="blue">
+            {results.createdAt.slice(0, 10) === new Date().toISOString().slice(0, 10)
+              ? "Today"
+              : results.createdAt.slice(0, 10) === new Date(new Date().getTime() - 86400000).toISOString().slice(0, 10)
+                ? "Yesterday"
+                : results.createdAt.slice(0, 10)}
+          </Badge>
+        </Box>
+      </Card>
+    ))}
+  </SimpleGrid>
+  
   )
 }

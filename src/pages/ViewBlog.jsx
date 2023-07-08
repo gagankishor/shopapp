@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { Box, Flex, Heading, Image, Spinner, Text } from "@chakra-ui/react";
+import { Box, Divider, Flex, Heading, Image, Spinner, Text } from "@chakra-ui/react";
 import axios from "axios";
 import Dashboard from "./Dashboard";
 
@@ -40,22 +40,24 @@ export default function ViewBlog() {
     return <div>Error loading blog data.</div>; // Render an error message if data is not available
   }
 
-  return (
-    <Box margin={"50px"} alignItems={"center"}>
-      <Box mb={"50px"}>
+  return (<Box margin="100px">
+    <Box margin="50px" alignItems="center">
+      <Box mb="50px" textAlign="center">
         <Image src={blog.image} width={1300} mb={5} height={600} alt="Green double couch with wooden legs" borderRadius="lg" />
-        <hr/>
-        <Heading as="h1" textAlign={"center"} color="#1b263b" fontSize="2xl" mt={5} mb={5}>
+        <Divider />
+        <Heading as="h1" color="#1b263b" fontSize="2xl" mt={5} mb={5}>
           {blog.title}
         </Heading>
-        <hr/>
-        <Text fontSize="md" textAlign={"justify"} color="#415a77" mt={5} mb={4} dangerouslySetInnerHTML={{ __html: blog.description }}>
+        <Divider />
+        <Text fontSize="md" textAlign="justify" color="#415a77" mt={5} mb={4} dangerouslySetInnerHTML={{ __html: blog.description }}>
           {/* {blog.description} */}
-        </Text> <hr/>
+        </Text>
+        <Divider />
         {/* Additional blog content */}
       </Box>
-     
+    </Box>
       <Dashboard />
     </Box>
   );
+  
 }

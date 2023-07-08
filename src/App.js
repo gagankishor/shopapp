@@ -14,11 +14,13 @@ import Profile from './pages/Profile';
 // import { createAction } from './pages/CreateQuiz';
 // import Question from './pages/Question';
 // import CreateQuestion from './pages/CreateQuestion';
-import Create from './pages/CreateQuiz';
+// import Create from './pages/CreateQuiz';
+
 import Login from './pages/login';
 import Register from './pages/Register';
 import Edit from './pages/EditBlog';
 import ViewBlog from './pages/ViewBlog';
+import Create from './pages/CreateBlog';
 // import PushNotification from './PushNotification';
 // import ProtectedRoute from './auth/ProtectedRoute';
 

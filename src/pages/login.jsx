@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import {  useNavigate } from 'react-router-dom';
-import { Heading, FormControl, FormLabel, Input, Button, useToast, Flex, Box } from '@chakra-ui/react';
+import { useNavigate } from 'react-router-dom';
+import { Heading, FormControl, FormLabel, Input, Button, useToast, Flex, Box,  Text } from '@chakra-ui/react';
 import axios from 'axios';
 
 const Login = () => {
@@ -42,7 +42,7 @@ const Login = () => {
           position: 'top',
           status: 'success',
         });
-        
+
         // Redirect the user to the protected dashboard page
         navigate('/');
         window.location.reload();
@@ -53,31 +53,27 @@ const Login = () => {
   };
 
   return (
-    <div>
-      <Heading>Login</Heading>
-      <form onSubmit={handleSubmit}>
-        <FormControl w={400}>
-          <FormLabel>Email:</FormLabel>
-          <Input type="email" value={email} onChange={handleEmailChange} />
-        </FormControl>
-        <FormControl w={400}>
-          <FormLabel>Password:</FormLabel>
-          <Input type="password" value={password} onChange={handlePasswordChange} />
-        </FormControl>
-        {error && <p>{error}</p>}
-        <Flex  mt={10}>
-        <Box>
-         </Box><Box ms={10}><Button type="submit" colorScheme="blue" >
+    <Flex align="center" mt={-100} justify="center" height="100vh">
+      <Box textAlign="center" maxWidth={400} p={8} borderWidth={1} borderRadius="md" boxShadow="md">
+        <Heading>Login</Heading>
+        <form onSubmit={handleSubmit} mt={4}>
+          <FormControl>
+            <FormLabel>Email:</FormLabel>
+            <Input type="email" value={email} onChange={handleEmailChange} />
+          </FormControl>
+          <FormControl mt={4}>
+            <FormLabel>Password:</FormLabel>
+            <Input type="password" value={password} onChange={handlePasswordChange} />
+          </FormControl>
+          {error && <Text color="red">{error}</Text>}
+          <Button type="submit" mt={6} colorScheme="blue" isFullWidth>
             Login
           </Button>
-          </Box>
-          <Box>
-          </Box>
-        </Flex>
-
-      </form>
-    </div>
+        </form>
+      </Box>
+    </Flex>
   );
+  
 };
 
 export default Login;
