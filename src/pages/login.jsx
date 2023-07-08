@@ -9,31 +9,22 @@ const Login = () => {
   const [error, setError] = useState('');
   const navigate = useNavigate();
   const toast = useToast();
-
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
   };
-
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
   };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     try {
       const response = await axios.post('https://blog1-br26.onrender.com/api/users/login', {
         email,
         password,
       });
-
       if (response.data) {
-        // Assuming the server responds with a JWT in the 'token' property
         const token = response.data.results.accessToken;
-
-        // Store the JWT in local storage
         localStorage.setItem('token', token);
-
         toast({
           title: 'Login successful.',
           description: 'You have successfully logged in.',
@@ -42,8 +33,6 @@ const Login = () => {
           position: 'top',
           status: 'success',
         });
-
-        // Redirect the user to the protected dashboard page
         navigate('/');
         window.location.reload();
       }
@@ -51,7 +40,6 @@ const Login = () => {
       setError('Failed to log in. Please check your credentials.');
     }
   };
-
   return (
     <Flex align="center" mt={-100} justify="center" height="100vh">
       <Box textAlign="center" maxWidth={400} p={8} borderWidth={1} borderRadius="md" boxShadow="md">
@@ -73,7 +61,5 @@ const Login = () => {
       </Box>
     </Flex>
   );
-  
 };
-
 export default Login;

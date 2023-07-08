@@ -16,14 +16,11 @@ import {
   ListIcon
 } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
-
 export default function Profile() {
   const [tasks, setTasks] = useState([]);
-
   useEffect(() => {
     const fetchUserData = async () => {
       const token = localStorage.getItem('token');
-
       try {
         const res = await fetch('https://blog1-br26.onrender.com/api/users/current', {
           method: 'GET',
@@ -32,21 +29,17 @@ export default function Profile() {
             'Content-Type': 'application/json'
           }
         });
-
         if (!res.ok) {
           throw new Error('Failed to fetch quiz data');
         }
-
         const data = await res.json();
         setTasks(data.results);
       } catch (error) {
         console.error('Error fetching quiz data:', error);
       }
     };
-
     fetchUserData();
   }, []);
-
   return (
     <Tabs mt="40px" p="20px" variant="enclosed" colorScheme="purple">
       <TabList>

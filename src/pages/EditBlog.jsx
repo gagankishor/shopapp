@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { Box, Heading, FormControl, FormLabel, Input, FormHelperText, Textarea, Button } from '@chakra-ui/react';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
-
 export default function Edit() {
   const [title, setTitle] = useState('');
   const [image, setImage] = useState('');
@@ -10,7 +9,6 @@ export default function Edit() {
   const navigate = useNavigate();
   const { id } = useParams();
   console.log(id)
-  // useEffect
 useEffect(() => {
   axios.get(`https://blog1-br26.onrender.com/api/users/items/${id}`)
     .then((response) => {
@@ -23,11 +21,8 @@ useEffect(() => {
       console.error('Error fetching blog details:', error);
     });
 }, [id]);
-
-// handleSubmit
 const handleSubmit = async (event) => {
   event.preventDefault();
-
   try {
     const token = localStorage.getItem('token');
     const response = await axios.put(`https://blog1-br26.onrender.com/api/users/items/${id}`, {
@@ -40,21 +35,16 @@ const handleSubmit = async (event) => {
         'Content-Type': 'application/json',
       },
     });
-
     if (response.status !== 200) {
       throw new Error('Failed to update the blog');
     }
-
     console.log('Blog updated successfully');
-    // Perform any additional actions after successful update
-    navigate('/'); // Navigate to the desired route on success
+    navigate('/');
   } catch (error) {
     console.error('Error updating blog:', error);
   }
 };
-
-
-  return (
+return (
     <Box maxW="480px">
       <Heading>Edit Blog</Heading>
       <form onSubmit={handleSubmit}>

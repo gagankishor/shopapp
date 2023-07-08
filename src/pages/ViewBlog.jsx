@@ -7,39 +7,33 @@ import Dashboard from "./Dashboard";
 export default function ViewBlog() {
   const { id } = useParams();
   const [blog, setBlog] = useState(null);
-  const [isLoading, setLoading] = useState(true); // Add isLoading state
-
+  const [isLoading, setLoading] = useState(true);
   const fetchBlogData = async () => {
     try {
       const response = await axios.get(`https://blog1-br26.onrender.com/api/users/items/${id}`);
       const data = response.data.results;
       setBlog(data);
-      setLoading(false); // Set loading to false after data is fetched
+      setLoading(false);
     } catch (error) {
       console.error("Error fetching blog data:", error);
-      setLoading(false); // Set loading to false in case of error
+      setLoading(false);
     }
   };
-
   useEffect(() => {
     fetchBlogData();
-
     const documentHeight = Math.floor((document.documentElement.scrollHeight - window.innerHeight) * 0);
     window.scrollTo(0, documentHeight / 4);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id ,isLoading]);
-
   if (isLoading) {
     return (
       <Flex align="center" justify="center" height="100vh">
         <Spinner size="xl" />
       </Flex>
     );  }
-
   if (!blog) {
-    return <div>Error loading blog data.</div>; // Render an error message if data is not available
+    return <div>Error loading blog data.</div>;
   }
-
   return (<Box margin="100px">
     <Box margin="50px" alignItems="center">
       <Box mb="50px" textAlign="center">
@@ -50,14 +44,11 @@ export default function ViewBlog() {
         </Heading>
         <Divider />
         <Text fontSize="md" textAlign="justify" color="#415a77" mt={5} mb={4} dangerouslySetInnerHTML={{ __html: blog.description }}>
-          {/* {blog.description} */}
         </Text>
         <Divider />
-        {/* Additional blog content */}
       </Box>
     </Box>
       <Dashboard />
     </Box>
   );
-  
 }

@@ -1,18 +1,11 @@
-// import { ExternalLinkIcon, ViewIcon } from "@chakra-ui/icons"
 import {
-  // Box,
   SimpleGrid,
   Text,
-  // Flex,
   Heading,
   Card,
-  // CardHeader,
   CardBody,
   CardFooter,
-  // HStack,
-  
   Button,
-  // Avatar,
   Image,
   Stack,
   ButtonGroup,
@@ -20,7 +13,6 @@ import {
   Spinner,
   Flex,
   Badge
-
 } from "@chakra-ui/react"
 import axios from "axios";
 import { useState, useEffect } from "react";
@@ -37,8 +29,6 @@ export default function Dashboard() {
     fetchQuizData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-
   const handleClick = async (_id) => {
     if (token) {
       try {
@@ -64,7 +54,6 @@ export default function Dashboard() {
       }
     }
   };
-
   const handleEdit = (_id) => {
     if (token) {
       console.log("token found");
@@ -80,10 +69,7 @@ export default function Dashboard() {
   const handleView = (id) => {
     console.log(id)
     navigate(`/Viewblog/${id}`);
-    // window.location.reload();
   };
-
-
   const fetchQuizData = async () => {
     try {
       const response = await axios.get("https://blog1-br26.onrender.com/api/users/items", {
@@ -106,7 +92,6 @@ export default function Dashboard() {
       </Flex>
     );
   }
-
   return (
     <SimpleGrid padding={50} spacing={10} minChildWidth={250}>
     {tasks.map(results => (
@@ -125,12 +110,10 @@ export default function Dashboard() {
                 {results.title.slice(0, 50)}
               </Heading>
               <Text size="sm" textAlign="justify" dangerouslySetInnerHTML={{ __html: results.description.slice(0, 100) }}>
-                {/* {results.description.slice(0, 130)} */}
               </Text>
             </Stack>
           </CardBody>
-        </Box>
-        
+        </Box>  
         {token && (
           <CardFooter>
             <ButtonGroup>
@@ -155,6 +138,5 @@ export default function Dashboard() {
       </Card>
     ))}
   </SimpleGrid>
-  
   )
 }

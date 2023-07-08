@@ -39,8 +39,6 @@ export default function Navbar() {
             <Text fontSize="xs" color="white">3</Text>
           </AvatarBadge>
         </Avatar>
-
-        {/* Add New Blog Button */}
         <Button textColor={"001219"} colorScheme="transparent" as={Link} to="/create">
           New Blog
         </Button>

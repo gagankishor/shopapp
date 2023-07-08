@@ -2,7 +2,6 @@ import { useRef, useState } from 'react';
 import { Box, Heading, FormControl, FormLabel, Input, FormHelperText,  Button, Flex, Spinner } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
 import JoditEditor from 'jodit-react';
-
 export default function Create() {
   const [title, setTitle] = useState('');
   const [image, setImage] = useState('');
@@ -10,10 +9,8 @@ export default function Create() {
   const navigate = useNavigate();
   const editor = useRef(null);
   const [isLoading, setLoading] = useState(false); // Add isLoading state
-
   const handleSubmit = async (event) => {
     event.preventDefault();
-
     try {
       setLoading(true);
       const res = await fetch('https://blog1-br26.onrender.com/api/users/items', {
@@ -22,16 +19,13 @@ export default function Create() {
         headers: {
           'Content-Type': 'application/json'
         }
-
       });
-
       if (!res.ok) {
         throw new Error('Failed to create a blog');
       }
       setLoading(false);
       console.log('Blog added successfully');
-      // Perform any additional actions after successful creation
-      navigate('/'); // Navigate to the desired route on success
+      navigate('/');
     } catch (error) {
       console.error('Error adding blog:', error);
     }
@@ -42,10 +36,9 @@ export default function Create() {
         <Spinner size="xl" />
       </Flex>
     );  }
-
     return (
-      <Flex mt={-100} align="center" justify="center" height="100vh">
-        <Box maxW="480px" p={4}>
+      <Flex  align="center" justify="center" minHeight={"100vh" } >
+        <Box maxW="880px" p={4}>
           <Heading textAlign="center" mb={4}>
             Create Blog
           </Heading>
@@ -88,7 +81,6 @@ export default function Create() {
         </Box>
       </Flex>
     );
-    
 }
 
 
