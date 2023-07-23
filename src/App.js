@@ -19,8 +19,8 @@ const router = createBrowserRouter(
       <Route exact index element={<Dashboard />} />
       <Route exact path="/editblog/:id" element={token ? <Edit /> : <Login />} />
       <Route exact path="/viewblog/:id" element={<ViewBlog />} />
-      <Route exact path="profile" element={<Profile />} />
-      <Route exact path="create" element={<Create />} />
+      <Route exact path="profile" element={token ?<Profile /> : <Login />} />
+      <Route exact path="create" element={token ?<Create /> : <Login />} />
       <Route exact path="login" element={<Login />} />
     </Route>
   )
