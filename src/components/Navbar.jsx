@@ -30,19 +30,28 @@ export default function Navbar() {
 
   return (
     <Flex as="nav" p="5px"  alignItems="center" position="sticky" top="0" zIndex="10" backgroundColor="">
-      <Heading  as={Link} to="/" exact fontSize="1.5em">GAGAN'S BLOGS</Heading>
+      <Heading  as={Link} to="/" exact fontSize="1.5em">shop</Heading>
       <Spacer />
 
       <HStack textColor={"001219"} spacing="20px"> 
+        
+        <Button textColor={"001219"} colorScheme="transparent" as={Link} to="/create">
+          New product
+        </Button>
+        <Button textColor={"001219"} colorScheme="transparent" as={Link} to="/createcatagory">
+          New catagory
+        </Button>
+        <Button textColor={"001219"} colorScheme="transparent" as={Link} to="/register">
+          New Register
+        </Button>
+        <Button textColor={"001219"} colorScheme="transparent" as={Link} to="/productsbycategory">
+          New ProductsByCategory
+        </Button>
         <Avatar name="mario" as={Link} to="/profile" src="/img/mario.png">
           <AvatarBadge boxSize="1.3em" bg="teal.500">
             <Text fontSize="xs" color="white">3</Text>
           </AvatarBadge>
         </Avatar>
-        <Button textColor={"001219"} colorScheme="transparent" as={Link} to="/create">
-          New Blog
-        </Button>
-        
         {token ? (
           <Button 
             colorScheme="red"

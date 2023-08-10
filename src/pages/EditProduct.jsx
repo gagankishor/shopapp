@@ -10,7 +10,7 @@ export default function Edit() {
   const { id } = useParams();
   console.log(id)
 useEffect(() => {
-  axios.get(`https://blog1-br26.onrender.com/api/users/items/${id}`)
+  axios.get(`http://localhost:5000/api/product-categories/${id}`)
     .then((response) => {
       const data = response.data;
       setTitle(data.results.title);
@@ -25,7 +25,7 @@ const handleSubmit = async (event) => {
   event.preventDefault();
   try {
     const token = localStorage.getItem('token');
-    const response = await axios.put(`https://blog1-br26.onrender.com/api/users/items/${id}`, {
+    const response = await axios.put(`http://localhost:5000/api/product-categories/${id}`, {
       title,
       image,
       description

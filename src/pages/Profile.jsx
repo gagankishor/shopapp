@@ -22,7 +22,7 @@ export default function Profile() {
     const fetchUserData = async () => {
       const token = localStorage.getItem('token');
       try {
-        const res = await fetch('https://blog1-br26.onrender.com/api/users/current', {
+        const res = await fetch('http://localhost:5000/api/users/current', {
           method: 'GET',
           headers: {
             Authorization: `Bearer ${token}`,

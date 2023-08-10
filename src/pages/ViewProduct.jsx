@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Box, Divider, Flex, Heading, Image, Spinner, Text } from "@chakra-ui/react";
 import axios from "axios";
-import Dashboard from "./Dashboard";
+import Dashboard from "./allProduct";
 
 export default function ViewBlog() {
   const { id } = useParams();
@@ -10,7 +10,7 @@ export default function ViewBlog() {
   const [isLoading, setLoading] = useState(true);
   const fetchBlogData = async () => {
     try {
-      const response = await axios.get(`https://blog1-br26.onrender.com/api/users/items/${id}`);
+      const response = await axios.get(`http://localhost:5000/api/products`);
       const data = response.data.results;
       setBlog(data);
       setLoading(false);
