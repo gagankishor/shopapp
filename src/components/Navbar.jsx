@@ -47,6 +47,9 @@ export default function Navbar() {
         <Button textColor={"001219"} colorScheme="transparent" as={Link} to="/productsbycategory">
           New ProductsByCategory
         </Button>
+        <Button textColor={"001219"} colorScheme="transparent" as={Link} to="/updateuserdocuments">
+         Update userdocuments
+        </Button>updateuserdocuments
         <Avatar name="mario" as={Link} to="/profile" src="/img/mario.png">
           <AvatarBadge boxSize="1.3em" bg="teal.500">
             <Text fontSize="xs" color="white">3</Text>

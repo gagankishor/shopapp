@@ -16,6 +16,7 @@ import CreateCatagory from './pages/CreateProductCatagory';
 import Register from './pages/Register';
 import ProductsByCategory from './pages/ViewAllProduct';
 import ProductListPage from './pages/ProductListPage';
+import UpdateUserDocuments from './pages/UpdateUserDocuments';
 const token = localStorage.getItem('token');
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -27,6 +28,7 @@ const router = createBrowserRouter(
       <Route exact path="create" element={token ?<Create /> : <Login />} />
       <Route exact path="register" element={<Register />} />
       <Route exact path="productsbycategory" element={<ProductsByCategory />} />
+      <Route exact path="updateuserdocuments" element={<UpdateUserDocuments />} />
       <Route exact path="createcatagory" element={token ?<CreateCatagory /> : <Login />} />
 
       <Route exact path="login" element={<Login />} />
